@@ -1,0 +1,30 @@
+:root {
+  color-scheme: dark;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: #101411;
+  color: #edf2e8;
+  --accent: #bbf68b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-height: 100svh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 6vw, 5rem);
+  background: radial-gradient(ellipse at top right, #233221 0, transparent 65%);
+}
+
+.terminal { width: min(100%, 58rem); }
+.prompt { color: var(--accent); font-size: .85rem; margin: 0 0 3rem; }
+.prompt span { opacity: .5; margin-left: .75rem; }
+h1 { font-size: clamp(3rem, 10vw, 7.5rem); letter-spacing: -.07em; line-height: 1; margin: 0 0 2rem; }
+.cursor { color: var(--accent); animation: blink 1.5s step-end infinite; }
+.intro { color: #b6c3b2; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.6; }
+.status { display: flex; align-items: center; gap: .65rem; margin-top: 3rem; font-size: .8rem; color: #b6c3b2; }
+.status-light { width: .45rem; height: .45rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px #bbf68b60; }
+footer { margin-top: 5rem; color: #7f917a; font-size: .7rem; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
