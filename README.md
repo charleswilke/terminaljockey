@@ -14,7 +14,7 @@ Open http://localhost:8080. No installation or build step is required.
 
 - `index.html` — page content and metadata
 - `styles.css` — responsive styles
-- `main.js` — animated Canvas star field and browser enhancements
+- `main.js` — animated Canvas space flight and browser enhancements
 - `assets/terminal-jockey-lime.png` — transparent electric-lime logo
 - `favicon.svg` — site icon
 - `vercel.json` — static hosting configuration
@@ -30,3 +30,5 @@ Production domain: https://terminaljockey.com. The `www` hostname redirects to t
 Keep credentials out of the repository. Local Vercel linkage and environment files are ignored by Git.
 
 The star field respects reduced-motion preferences and pauses in background tabs. The transparent logo was prepared from the supplied artwork using the built-in image-generation tool.
+
+Space flight uses perspective star trails and pre-rendered procedural nebula and spiral-galaxy textures. Scenery moves through several depths, with a Pause flight control and a static reduced-motion view. No new image dependencies or external libraries are required.
