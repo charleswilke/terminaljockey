@@ -14,7 +14,8 @@ Open http://localhost:8080. No installation or build step is required.
 
 - `index.html` — page content and metadata
 - `styles.css` — responsive styles
-- `main.js` — small browser enhancements
+- `main.js` — animated Canvas star field and browser enhancements
+- `assets/terminal-jockey-lime.png` — transparent electric-lime logo
 - `favicon.svg` — site icon
 - `vercel.json` — static hosting configuration
 
@@ -27,3 +28,5 @@ The GitHub repository is connected to Vercel. Pushes to `main` deploy to product
 Production domain: https://terminaljockey.com. The `www` hostname redirects to the apex domain.
 
 Keep credentials out of the repository. Local Vercel linkage and environment files are ignored by Git.
+
+The star field respects reduced-motion preferences and pauses in background tabs. The transparent logo was prepared from the supplied artwork using the built-in image-generation tool.

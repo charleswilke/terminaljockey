@@ -3,21 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#101411">
-    <meta name="description" content="Terminal Jockey. Something new is taking shape.">
-    <title>Terminal Jockey</title>
+    <meta name="theme-color" content="#060611">
+    <meta name="description" content="Terminal Jockey Games. Coming soon.">
+    <title>Terminal Jockey Games — Coming Soon</title>
     <link rel="canonical" href="https://terminaljockey.com/">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="/assets/terminal-jockey-lime.png" as="image">
     <link rel="stylesheet" href="/styles.css">
     <script src="/main.js" defer></script>
   </head>
   <body>
-    <main class="terminal" aria-labelledby="site-title">
-      <p class="prompt">terminaljockey.com <span aria-hidden="true">~</span></p>
-      <h1 id="site-title">Terminal<br>Jockey<span class="cursor" aria-hidden="true">_</span></h1>
-      <p class="intro">Something new is taking shape.</p>
-      <p class="status"><span class="status-light" aria-hidden="true"></span> Setting the stage.</p>
-      <footer>© <span id="year">2026</span> Terminal Jockey</footer>
+    <canvas id="starfield" aria-hidden="true"></canvas>
+    <header class="masthead"><span class="signal" aria-hidden="true"></span> terminaljockey.com</header>
+    <main class="hero" aria-labelledby="site-title">
+      <h1 id="site-title" class="sr-only">Terminal Jockey Games</h1>
+      <img class="logo" src="/assets/terminal-jockey-lime.png" alt="A jockey riding a speeding terminal above the words Terminal Jockey Games" width="1536" height="1024" fetchpriority="high">
+      <div class="announcement">
+        <p class="eyebrow">A new signal is on the horizon</p>
+        <p class="coming-soon">Coming soon<span class="cursor" aria-hidden="true">_</span></p>
+      </div>
     </main>
+    <footer><span>© <span id="year">2026</span> Terminal Jockey Games</span><span class="coordinates" aria-hidden="true">READY WHEN YOU ARE.</span></footer>
   </body>
 </html>
