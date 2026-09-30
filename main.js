@@ -175,14 +175,16 @@ if (context) {
     galaxy(89, ['255,214,148', '232,120,238', '116,182,255'], 'barred'),
   ];
 
+  // Keep the cluster texture saved, but exclude it from flight for now.
+  const activeGalaxyIndices = [0, 1, 3, 4];
+
   const scenery = [
     { image: nebula(7, ['91,57,255', '223,40,181', '255,114,179']), x: -1.06, y: -.52, z: 1.5, size: 1.8, angle: -.65, spin: .006, alpha: .85 },
     { image: nebula(19, ['23,214,234', '42,107,255', '168,67,255']), x: 1.18, y: .65, z: 1.65, size: 1.8, angle: -.65, spin: -.008, alpha: .85 },
     { image: nebula(31, ['255,104,62', '246,66,162', '114,62,255']), x: -.95, y: .94, z: 2.3, size: 1.9, angle: .55, spin: .008, alpha: .6 },
     { image: galaxyCatalog[0], galaxyIndex: 0, x: -1.05, y: -.68, z: 1.55, size: .6, angle: -.4, spin: .022, alpha: .95 },
-    { image: galaxyCatalog[2], galaxyIndex: 2, x: 1.2, y: .72, z: 1.8, size: .6, angle: .35, spin: -.012, alpha: .9 },
+    { image: galaxyCatalog[3], galaxyIndex: 3, x: 1.2, y: .72, z: 1.8, size: .6, angle: -.28, spin: .004, alpha: .9 },
     { image: galaxyCatalog[1], galaxyIndex: 1, x: 1.12, y: -.95, z: 2.05, size: .57, angle: -.25, spin: .006, alpha: .95 },
-    { image: galaxyCatalog[3], galaxyIndex: 3, x: -1.35, y: .03, z: 1.6, size: .45, angle: -.28, spin: .004, alpha: .9 },
   ];
 
   function resetStar(star, initial = false) {
@@ -230,7 +232,8 @@ if (context) {
       if (object.z < .65) {
         object.z = 2.8;
         if (object.galaxyIndex !== undefined) {
-          object.galaxyIndex = (object.galaxyIndex + 1) % galaxyCatalog.length;
+          const nextIndex = (activeGalaxyIndices.indexOf(object.galaxyIndex) + 1) % activeGalaxyIndices.length;
+          object.galaxyIndex = activeGalaxyIndices[nextIndex];
           object.image = galaxyCatalog[object.galaxyIndex];
         }
       }
