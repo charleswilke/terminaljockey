@@ -31,4 +31,4 @@ Keep credentials out of the repository. Local Vercel linkage and environment fil
 
 The star field respects reduced-motion preferences and pauses in background tabs. The transparent logo was prepared from the supplied artwork using the built-in image-generation tool.
 
-Space flight uses perspective star trails and pre-rendered procedural nebula and spiral-galaxy textures. Scenery moves through several depths, with a Pause flight control and a static reduced-motion view. No new image dependencies or external libraries are required.
+Space flight uses perspective star trails and pre-rendered procedural nebula and spiral-galaxy textures. Pause flight eases into a resting state: forward travel stops, star trails fade into points, and gentle camera drift, twinkling, and slow scenery rotation continue. Resume flight smoothly accelerates again. Reduced-motion preferences still produce a completely static view, and background tabs suspend animation. No new image dependencies or external libraries are required.

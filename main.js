@@ -16,6 +16,8 @@ if (context) {
   let previousTime = 0;
   let elapsed = 0;
   let paused = false;
+  let flightAmount = 1;
+  let sceneryTime = 0;
 
   // Paint the detailed scenery once, then move these textures through space.
   function texture(size, paint) {
@@ -103,6 +105,7 @@ if (context) {
     star.y = (Math.random() - .5) * height / horizon * star.z * 1.2;
     star.color = starColors[Math.floor(Math.random() * starColors.length)];
     star.brightness = .4 + Math.random() * .6;
+    star.phase = Math.random() * Math.PI * 2;
   }
 
   function resize() {
@@ -123,20 +126,26 @@ if (context) {
 
   function draw(delta) {
     elapsed += delta;
+    const targetFlight = paused || motionPreference.matches ? 0 : 1;
+    flightAmount += (targetFlight - flightAmount) * (1 - Math.exp(-delta * 3.2));
+    if (Math.abs(targetFlight - flightAmount) < .002) flightAmount = targetFlight;
+    // Rest keeps a little life in the sky, without moving forward through it.
+    sceneryTime += delta * (.16 + flightAmount * .84);
     context.clearRect(0, 0, width, height);
-    const centerX = width * .5 + Math.sin(elapsed * .18) * width * .015;
-    const centerY = height * .46 + Math.cos(elapsed * .15) * height * .015;
-    const speed = .46;
+    const drift = .004 + flightAmount * .011;
+    const centerX = width * .5 + Math.sin(elapsed * .18) * width * drift;
+    const centerY = height * .46 + Math.cos(elapsed * .15) * height * drift;
+    const speed = .46 * flightAmount;
     const still = motionPreference.matches;
     context.globalCompositeOperation = 'screen';
 
     for (const object of scenery) {
-      object.z -= delta * .028;
+      object.z -= delta * .028 * flightAmount;
       if (object.z < .65) object.z = 2.8;
       const size = horizon * object.size / object.z;
       context.save();
       context.translate(centerX + object.x * width * .5 / object.z, centerY + object.y * height * .5 / object.z);
-      context.rotate(object.angle + elapsed * object.spin);
+      context.rotate(object.angle + sceneryTime * object.spin);
       context.globalAlpha = object.alpha;
       context.drawImage(object.image, -size / 2, -size / 2, size, size);
       context.restore();
@@ -159,7 +168,8 @@ if (context) {
         tailX = x + (tailX - x) * 130 / length;
         tailY = y + (tailY - y) * 130 / length;
       }
-      const brightness = Math.min(1, (.2 + .8 / star.z) * star.brightness);
+      const twinkle = 1 - (1 - flightAmount) * (.12 - .12 * Math.sin(elapsed * .55 + star.phase));
+      const brightness = Math.min(1, (.2 + .8 / star.z) * star.brightness) * twinkle;
       const radius = Math.min(2.1, .35 + .45 / star.z);
       context.globalAlpha = brightness;
       context.strokeStyle = star.color;
@@ -192,10 +202,13 @@ if (context) {
       flightToggle.hidden = false;
       flightToggle.disabled = motionPreference.matches;
       flightToggle.textContent = motionPreference.matches ? 'Motion off' : paused ? 'Resume flight' : 'Pause flight';
+      flightToggle.title = paused && !motionPreference.matches ? 'Rest in space with gentle ambient movement' : '';
       flightToggle.setAttribute('aria-pressed', String(paused || motionPreference.matches));
     }
-    if (motionPreference.matches) draw(0);
-    else if (!paused && !document.hidden) frame = requestAnimationFrame(animate);
+    if (motionPreference.matches) {
+      flightAmount = 0;
+      draw(0);
+    } else if (!document.hidden) frame = requestAnimationFrame(animate);
   }
 
   flightToggle?.addEventListener('click', () => {
